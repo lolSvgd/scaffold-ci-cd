@@ -2,8 +2,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1.0
-  # for posting a GitHub PR comment
-  pr-commenter: circleci/github-pull-request@0.2.0
+  # Removed invalid or non-existent orb 'circleci/github-pull-request@0.2.0'
 
 jobs:
   test:
@@ -21,11 +20,7 @@ jobs:
           path: reports/junit
       - store_artifacts:
           path: reports
-      - pr-commenter/comment:
-          github-token: $GITHUB_TOKEN
-          body: |
-            #### :white_check_mark: Test Summary
-            $(circleci tests summary)
+      # Removed step using the invalid orb
 
 workflows:
   test-and-comment:
