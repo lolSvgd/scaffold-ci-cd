@@ -3,8 +3,6 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   # for posting a GitHub PR comment
-  pr-commenter: circleci/github-pull-request@0.2.0
-
 jobs:
   test:
     executor:
@@ -21,11 +19,6 @@ jobs:
           path: test-results
       - store_artifacts:
           path: reports
-      - pr-commenter/comment:
-          github-token: $GITHUB_TOKEN
-          body: |
-            #### :white_check_mark: Test Summary
-            $(circleci tests summary)
 
 workflows:
   test-and-comment:
