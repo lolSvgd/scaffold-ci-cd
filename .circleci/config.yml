@@ -8,7 +8,7 @@ orbs:
 jobs:
   test:
     executor:
-      name: node/default
+      name: node/defaulta
       tag: "22.15.1"         
     steps:
       - checkout
@@ -18,7 +18,7 @@ jobs:
           name: Run tests
           command: npm test
       - store_test_results:
-          path: reports/junit
+          path: test-results
       - store_artifacts:
           path: reports
       - pr-commenter/comment:
