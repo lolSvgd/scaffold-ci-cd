@@ -2,23 +2,23 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1.0
-  # for posting a GitHub PR comment
+
 jobs:
   test:
     executor:
-      name: node/defaulta
-      tag: "22.15.1"         
+      name: node/default
+      tag: "22.15.1"
     steps:
       - checkout
-      # runs `npm ci` by default with caching
-      - node/install-packages
+      - run: npm install
+      - run: mkdir ~/junit
       - run:
-          name: Run tests
-          command: npm test
+          command: mocha test --reporter mocha-junit-reporter
+          environment:
+            MOCHA_FILE: ~/junit/test-results.xml
+          when: always
       - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: reports
+          path: ~/junit
 
 workflows:
   test-and-comment:
