@@ -10,15 +10,14 @@ jobs:
       tag: "22.15.1"
     steps:
       - checkout
-      - run: npm install
-      - run: mkdir ~/junit
+      - node/install-packages
       - run:
+          name: Run tests
           command: npm test
-          environment:
-            MOCHA_FILE: ~/junit/test-results.xml
-          when: always
       - store_test_results:
-          path: ~/junit
+          path: test-results
+      - store_artifacts:
+          path: reports
 
 workflows:
   test-and-comment:
