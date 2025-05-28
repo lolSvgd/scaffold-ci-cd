@@ -2,25 +2,22 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1.0
-  # Removed invalid or non-existent orb 'circleci/github-pull-request@0.2.0'
 
 jobs:
   test:
     executor:
       name: node/default
-      tag: "22.15.1"         
+      tag: "22.15.1"
     steps:
       - checkout
-      # runs `npm ci` by default with caching
       - node/install-packages
       - run:
           name: Run tests
           command: npm test
       - store_test_results:
-          path: reports/junit
+          path: test-results
       - store_artifacts:
           path: reports
-      # Removed step using the invalid orb
 
 workflows:
   test-and-comment:
